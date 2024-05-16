@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sp-fx-cru-dreact-client-side-solution",
+    "id": "e6717fb6-2f4d-4cc4-9cad-13cd72fddc0c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/sp-fx-cru-dreact.sppkg"
+  }
+}

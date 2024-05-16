@@ -1,0 +1,11 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "onprem19",
+    "version": "1.10.0",
+    "libraryName": "sp-fx-cru-dreact",
+    "libraryId": "e6717fb6-2f4d-4cc4-9cad-13cd72fddc0c",
+    "packageManager": "npm",
+    "componentType": "webpart"
+  }
+}

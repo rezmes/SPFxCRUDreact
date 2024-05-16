@@ -2,6 +2,17 @@ import * as React from 'react';
 import styles from './ReactCrud.module.scss';
 import { IReactCrudProps } from './IReactCrudProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import {
+  TextField,
+  Dropdown,
+  IDropdownOption,
+  IIconProps,
+  PrimaryButton,
+  DetailsList,
+  CheckboxVisibility,
+  SelectionMode,
+  DetailsListLayoutMode
+} from "office-ui-fabric-react";
 
 export default class ReactCrud extends React.Component < IReactCrudProps, {} > {
   public render(): React.ReactElement<IReactCrudProps> {

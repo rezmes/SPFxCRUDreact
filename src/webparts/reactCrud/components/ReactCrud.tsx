@@ -1,6 +1,9 @@
 import * as React from 'react';
 import styles from './ReactCrud.module.scss';
 import { IReactCrudProps } from './IReactCrudProps';
+import { IReactCrudState } from './IReactCrudState';
+import {PnpServices} from '../Services/pnpservices'
+
 import {
   TextField,
   Dropdown,
@@ -30,7 +33,27 @@ const ddlLevelOFKnowledgeOptions: IDropdownOption[] = [
   { key: 'Expert', text: 'Expert' }
 ];
 
-export default class ReactCrud extends React.Component<IReactCrudProps, {}> {
+export default class ReactCrud extends React.Component<IReactCrudProps, IReactCrudState> {
+  private _sp: PnpServices
+  constructor(props:IReactCrudProps, state: IReactCrudState){
+    super(props);
+
+    this.state={
+      status: 'Ready',
+      ListItems:[],
+      ListItem:{
+        Id:0,
+        Title:'',
+        Email:'',
+        Batch:'',
+        LevelOfKnowledge:''
+      }
+
+    };
+    this._sp = new PnpServices(this.props.context);
+  }
+
+
   public render(): React.ReactElement<IReactCrudProps> {
     return (
       <div>

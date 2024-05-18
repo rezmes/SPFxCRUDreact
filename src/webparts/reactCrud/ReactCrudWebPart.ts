@@ -21,7 +21,9 @@ export default class ReactCrudWebPart extends BaseClientSideWebPart<IReactCrudWe
     const element: React.ReactElement<IReactCrudProps > = React.createElement(
       ReactCrud,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        context:this.context,
+        listName: 'InovceList'
       }
     );
 
@@ -32,9 +34,6 @@ export default class ReactCrudWebPart extends BaseClientSideWebPart<IReactCrudWe
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
-  protected get dataVersion(): Version {
-    return Version.parse('1.0');
-  }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {

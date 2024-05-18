@@ -13,6 +13,7 @@ import {
   SelectionMode,
   DetailsListLayoutMode
 } from "office-ui-fabric-react";
+import { LIST_COLUMNS } from '../shared/constants';
 
 
 const stackTokens = {childrenGap:50}
@@ -99,6 +100,14 @@ export default class ReactCrud extends React.Component < IReactCrudProps, {} > {
    />
   </Stack>
   <div id='divStatus'></div>
+  <hr />
+  <DetailsList
+  items={[{Id: '0',Title:'Dummy Title', Email: 'dummy@abc.com', Batch: 'Batch 1', 'LevelOfKnowledge':'LevelOfKnowledge'}]}
+  columns={LIST_COLUMNS}
+  setKey='Id'
+  checkboxVisibility={CheckboxVisibility.onHover}
+  layoutMode={DetailsListLayoutMode}
+  />
       </div>
 
   //     <div className = { styles.reactCrud } >

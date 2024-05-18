@@ -34,7 +34,8 @@ const ddlLevelOFKnowledgeOptions: IDropdownOption[] = [
 ];
 
 export default class ReactCrud extends React.Component<IReactCrudProps, IReactCrudState> {
-  private _sp: PnpServices
+  private _sp: PnpServices;
+  private _selection: Selection
   constructor(props:IReactCrudProps, state: IReactCrudState){
     super(props);
 
@@ -51,7 +52,17 @@ export default class ReactCrud extends React.Component<IReactCrudProps, IReactCr
 
     };
     this._sp = new PnpServices(this.props.context);
+    this._selection = new Selection({
+      onSelectionChanged: () =>
+        this.setState({ ListItem: this._onItemSelectionChanged() }),
+    });
   }
+
+private _onItemSelectionChanged():any{
+  const selectedItem=this._selection.getSelection()[0] as IListItem;
+
+  return selectedItem;
+}
 
 
   public render(): React.ReactElement<IReactCrudProps> {

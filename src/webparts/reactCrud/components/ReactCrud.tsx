@@ -64,6 +64,16 @@ private _onItemSelectionChanged():any{
   return selectedItem;
 }
 
+private async callAndBindDetailsList(message:string):Promise<any> {
+  await this._sp.getItem(this.props.listName).then(listIteems => {
+    this.setState({
+      ListItems: listIteems,
+      status:message,
+    });
+  });
+    
+}
+
 
   public render(): React.ReactElement<IReactCrudProps> {
     return (

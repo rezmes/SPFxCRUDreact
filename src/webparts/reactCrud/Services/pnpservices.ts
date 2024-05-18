@@ -28,7 +28,7 @@ export class PnpServices implements IPnpService{
         }
     }
 
-    public async getItem(listName: string, columns:string[]): Promise<any> {
+    public async getItem(listName: string): Promise<any> {
         try {
             
             const items:any[] = await this._sp.web.lists.getByTitle(listName).items();

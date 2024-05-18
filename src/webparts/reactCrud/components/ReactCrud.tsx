@@ -84,7 +84,7 @@ private async _createItem() : Promise<any> {
 }
 
 
-private async _readList():Promise<any> {
+private async _readItem():Promise<any> {
   await this.callAndBindDetailsList('New Item Created Successfully ');
 }
 
@@ -138,27 +138,20 @@ componentDidMount(): void {
 
         <hr />
         <div className={styles.primaryButtonGroup}>
-          <PrimaryButton text="Create" iconProps={AddICon} />
-          <PrimaryButton text="Read" iconProps={ReadICon} />
-          <PrimaryButton text="Update" iconProps={SaveICon} />
-          <PrimaryButton text="Delete" iconProps={DeleteICon} />
+          <PrimaryButton text="Create" iconProps={AddICon} onClick={(e)=>this._createItem()} />
+          <PrimaryButton text="Read" iconProps={ReadICon} onClick={(e)=>this._readItem()}/>
+          <PrimaryButton text="Update" iconProps={SaveICon} onClick={(e)=>this._updateItem()}/>
+          <PrimaryButton text="Delete" iconProps={DeleteICon} onClick={(e)=>this._deleteItem()}/>
         </div>
         <div id="divStatus"></div>
         <hr />
         <DetailsList
-          items={[
-            {
-              Id: '0',
-              Title: 'Dummy Title',
-              Email: 'dummy@abc.com',
-              Batch: 'Batch 1',
-              LevelOfKnowledge: 'LevelOfKnowledge'
-            }
-          ]}
+          items={this.state.ListItems}
           columns={LIST_COLUMNS}
           setKey="Id"
           checkboxVisibility={CheckboxVisibility.onHover}
           layoutMode={DetailsListLayoutMode.fixedColumns}
+          slelection = {this._selection}
         />
       </div>
     );

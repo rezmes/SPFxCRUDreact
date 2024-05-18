@@ -11,6 +11,7 @@ import {
   IIconProps,
   PrimaryButton,
   DetailsList,
+  Selection,
   CheckboxVisibility,
   DetailsListLayoutMode
 } from 'office-ui-fabric-react';
@@ -151,7 +152,7 @@ componentDidMount(): void {
           setKey="Id"
           checkboxVisibility={CheckboxVisibility.onHover}
           layoutMode={DetailsListLayoutMode.fixedColumns}
-          slelection = {this._selection}
+          selection = {this._selection}
         />
       </div>
     );

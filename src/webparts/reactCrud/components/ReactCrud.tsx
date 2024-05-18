@@ -156,10 +156,19 @@ componentDidMount(): void {
               label="Select Level Of Knowledge"
               options={ddlLevelOFKnowledgeOptions}
               className={styles.dropdownCustom}
-              
+              selectedKey={this.state.ListItem.LevelOfKnowledge}
+              defaultValue={this.state.ListItem.LevelOfKnowledge}
+              value={this.state.ListItem.Title} 
+              onChange={(e, newValue)=>{
+                this.setState(
+                  (state) =>((state.ListItem.Batch = newValue.text), state)
+                );
+              }}              
             />
           </div>
         </div>
+
+              <div id='divStatus'>{this.state.status}</div>
 
         <hr />
         <div className={styles.primaryButtonGroup}>

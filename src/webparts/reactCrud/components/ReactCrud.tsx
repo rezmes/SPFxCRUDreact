@@ -122,17 +122,41 @@ componentDidMount(): void {
       <div>
         <div className={styles.rootStack}>
           <div className={styles.columnStack}>
-            <TextField label="Username" placeholder="Please enter username" />
-            <TextField label="Email" placeholder="Please enter your email address" />
+            <TextField label="Username" placeholder="Please enter username"
+            value={this.state.ListItem.Title} 
+            onChange={(e, newValue)=>{
+              this.setState(
+                (state) =>((state.ListItem.Title = newValue), state)
+              );
+            }}
+            />
+            <TextField label="Email" placeholder="Please enter your email address" 
+                        value={this.state.ListItem.Email} 
+                        onChange={(e, newValue)=>{
+                          this.setState(
+                            (state) =>((state.ListItem.Email = newValue), state)
+                          );
+                        }}
+            />
             <Dropdown
               label="Batch Number"
               options={ddlBatchOptions}
               className={styles.dropdownCustom}
+              selectedKey={this.state.ListItem.Batch}
+              defaultValue={this.state.ListItem.Batch}
+              value={this.state.ListItem.Title} 
+              onChange={(e, newValue)=>{
+                this.setState(
+                  (state) =>((state.ListItem.Batch = newValue.text), state)
+                );
+              }}
+
             />
             <Dropdown
               label="Select Level Of Knowledge"
               options={ddlLevelOFKnowledgeOptions}
               className={styles.dropdownCustom}
+              
             />
           </div>
         </div>

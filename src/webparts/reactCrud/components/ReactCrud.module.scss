@@ -1,7 +1,7 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 .reactCrud {
-  .container {
+    .container {
     max-width: 700px;
     margin: 0px auto;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -71,4 +71,35 @@
       display: inline-block;
     }
   }
+    /* Add your custom styles here */
+  
+  .customDropdown {
+    margin-bottom: 10px;
+  }
+
 }
+
+/* I am also 2*/
+
+.rootStack {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.columnStack {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 300px;
+}
+
+.primaryButtonGroup {
+  display: flex;
+  gap: 15px;
+}
+
+.dropdownCustom {
+  width: 300px;
+}
+

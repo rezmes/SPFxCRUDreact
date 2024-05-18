@@ -65,13 +65,54 @@ private _onItemSelectionChanged():any{
 }
 
 private async callAndBindDetailsList(message:string):Promise<any> {
-  await this._sp.getItem(this.props.listName).then(listIteems => {
+  await this._sp.getItems(this.props.listName).then(listItems => {
     this.setState({
-      ListItems: listIteems,
+      ListItems: listItems,
       status:message,
     });
   });
+}
+
+
+private async _createItem() : Promise<any> {
+
+  await this._sp.CreateItem(this.props.listName, this.state.ListItem)
+  .then((Id) => {
+    this.callAndBindDetailsList('New Item Created Successfully with ID' + Id
+    );
+  });
+}
+
+
+private async _readList():Promise<any> {
+  await this.callAndBindDetailsList('New Item Created Successfully ');
+}
+
+private async _updateItem(): Promise<any> {
+  await this._sp.updateItem(this.props.listName, this.state.ListItem.Id, {
+    Title: this.state.ListItem.Title,
+    Email: this.state.ListItem.Email,
+    Batch: this.state.ListItem.Batch,
+    LevelOfKnowledge: this.state.ListItem.LevelOfKnowledge
+  }).then((Id)=>{
+    this.callAndBindDetailsList(`Item ${Id} Updated Successfully`);
+  });
+}
+
+private async _deleteItem(): Promise<any> {
+  try {
+    await this._sp.deleteItem(this.props.listName, this.state.ListItem.Id)
+    .then(() => {
+      this.setState({status:'Item Deleted Successfully'});
+    });
+  } catch (error) {
     
+  }
+}
+
+
+componentDidMount(): void {
+    this.callAndBindDetailsList('Record Loaded')
 }
 
 

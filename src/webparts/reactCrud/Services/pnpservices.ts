@@ -6,7 +6,7 @@ import { getSP } from "./pnpjsConfig";
 
 export interface IPnpService{
     CreateItem(listName: string, itemObj:any):Promise<any>;
-    getItem(listName: string, columns:string[]):Promise<any>;
+    getItems(listName: string, columns:string[]):Promise<any>;
     updateItem(listName:string, itemId:number, itemObj:any):Promise<any>;
     deleteItem(listName:string, itemId:number):Promise<any>;
 }
@@ -28,7 +28,7 @@ export class PnpServices implements IPnpService{
         }
     }
 
-    public async getItem(listName: string): Promise<any> {
+    public async getItems(listName: string): Promise<any> {
         try {
             
             const items:any[] = await this._sp.web.lists.getByTitle(listName).items();

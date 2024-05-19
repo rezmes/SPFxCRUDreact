@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from './ReactCrud.module.scss';
 import { IReactCrudProps } from './IReactCrudProps';
 import { IReactCrudState } from './IReactCrudState';
+import { IListItems } from '../models/IListItems';
 import {PnpServices} from '../Services/pnpservices'
 
 import {
@@ -37,6 +38,7 @@ const ddlLevelOFKnowledgeOptions: IDropdownOption[] = [
 export default class ReactCrud extends React.Component<IReactCrudProps, IReactCrudState> {
   private _sp: PnpServices;
   private _selection: Selection
+
   constructor(props:IReactCrudProps, state: IReactCrudState){
     super(props);
 
@@ -60,9 +62,10 @@ export default class ReactCrud extends React.Component<IReactCrudProps, IReactCr
   }
 
 private _onItemSelectionChanged():any{
-  const selectedItem=this._selection.getSelection()[0] as IListItem;
+  const selectedItem=this._selection.getSelection()[0] as IListItems;
 
-  return selectedItem;
+  //we added this:  || {Id: 0, Title:'', Email:'',Batch:'',LevelOfKnowledge:''}
+  return selectedItem || {Id: 0, Title:'', Email:'',Batch:'',LevelOfKnowledge:''};
 }
 
 private async callAndBindDetailsList(message:string):Promise<any> {
@@ -78,15 +81,16 @@ private async callAndBindDetailsList(message:string):Promise<any> {
 private async _createItem() : Promise<any> {
 
   await this._sp.CreateItem(this.props.listName, this.state.ListItem)
-  .then((Id) => {
+  .then(Id => {
     this.callAndBindDetailsList('New Item Created Successfully with ID' + Id
     );
-  });
+  }
+  );
 }
 
 
 private async _readItem():Promise<any> {
-  await this.callAndBindDetailsList('New Item Created Successfully ');
+  await this.callAndBindDetailsList('List Loaded');
 }
 
 private async _updateItem(): Promise<any> {
@@ -105,9 +109,9 @@ private async _deleteItem(): Promise<any> {
     await this._sp.deleteItem(this.props.listName, this.state.ListItem.Id)
     .then(() => {
       this.setState({status:'Item Deleted Successfully'});
-    });
+      this.callAndBindDetailsList('List Reloaded')});
   } catch (error) {
-    
+    this.setState({ status: 'Error deleting item' });
   }
 }
 
@@ -117,26 +121,49 @@ componentDidMount(): void {
 }
 
 
+//////////////////////////
+//Because of v1.4.1 limits
+
+private _onChangeTextField = (
+  event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+  newValue: string | undefined
+): void => {
+  const { name } = event.currentTarget;
+  this.setState(prevState => ({
+    ListItem: { ...prevState.ListItem, [name]: newValue || '' }
+  }));
+};
+
+private _onChangeDropdown = (
+  event: React.FormEvent<HTMLDivElement>,
+  option: IDropdownOption | undefined
+): void => {
+  const { name } = event.currentTarget;
+  this.setState(prevState => ({
+    ListItem: { ...prevState.ListItem, [name]: option?.text || '' }
+  }));
+};
+
+//Because of v1.4.1 limits
+//////////////////////////
+
+
+
+
   public render(): React.ReactElement<IReactCrudProps> {
     return (
       <div>
         <div className={styles.rootStack}>
           <div className={styles.columnStack}>
             <TextField label="Username" placeholder="Please enter username"
-            value={this.state.ListItem.Title} 
-            onChange={(e, newValue)=>{
-              this.setState(
-                (state) =>((state.ListItem.Title = newValue), state)
-              );
-            }}
+            value={this.state.ListItem.Title}
+            name='Title'
+            onChange={this._onChangeTextField}
             />
             <TextField label="Email" placeholder="Please enter your email address" 
                         value={this.state.ListItem.Email} 
-                        onChange={(e, newValue)=>{
-                          this.setState(
-                            (state) =>((state.ListItem.Email = newValue), state)
-                          );
-                        }}
+                        name='Email'
+                        onChange={this._onChangeTextField}
             />
             <Dropdown
               label="Batch Number"
@@ -145,11 +172,8 @@ componentDidMount(): void {
               selectedKey={this.state.ListItem.Batch}
               defaultValue={this.state.ListItem.Batch}
               value={this.state.ListItem.Title} 
-              onChange={(e, newValue)=>{
-                this.setState(
-                  (state) =>((state.ListItem.Batch = newValue.text), state)
-                );
-              }}
+              name='Batch'
+              onChange={this._onChangeDropdown}
 
             />
             <Dropdown
@@ -159,11 +183,7 @@ componentDidMount(): void {
               selectedKey={this.state.ListItem.LevelOfKnowledge}
               defaultValue={this.state.ListItem.LevelOfKnowledge}
               value={this.state.ListItem.Title} 
-              onChange={(e, newValue)=>{
-                this.setState(
-                  (state) =>((state.ListItem.Batch = newValue.text), state)
-                );
-              }}              
+              onChange={this._onChangeDropdown}              
             />
           </div>
         </div>

@@ -1,8 +1,8 @@
-import { IlistItem } from "../models/IListItem";
+import { IlistItems } from "../models/IListItems";
 
 export interface IReactCrudState{
     status: string;
-    ListItem: IlistItem;
-    ListItems: IlistItem[];
+    ListItem: IlistItems;
+    ListItems: IlistItems[];
 
 }

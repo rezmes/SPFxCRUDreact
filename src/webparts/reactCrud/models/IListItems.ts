@@ -1,4 +1,4 @@
-export interface IlistItem{
+export interface IListItems{
     Id:number;
     Title:string;
     Email:string;

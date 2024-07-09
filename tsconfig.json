@@ -13,19 +13,9 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,    
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@microsoft"
-    ],
-    "types": [
-      "es6-promise",
-      "webpack-env"
-    ],
-    "lib": [
-      "es5",
-      "dom",
-      "es2015.collection"
-    ]
+    "noUnusedParameters": true,
+    "typeRoots": ["./node_modules/@types", "./node_modules/@microsoft"],
+    "types": ["es6-promise", "webpack-env"],
+    "lib": ["es5", "dom", "es2015.collection"]
   }
 }

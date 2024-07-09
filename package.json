@@ -16,14 +16,14 @@
     "@microsoft/sp-lodash-subset": "~1.4.0",
     "@microsoft/sp-office-ui-fabric-core": "~1.4.0",
     "@microsoft/sp-webpart-base": "~1.4.0",
-    "@pnp/logging": "^4.0.1",
-    "@pnp/sp": "^4.0.1",
+    "@pnp/sp": "2.0.9",
     "@types/es6-promise": "0.0.33",
     "@types/react": "15.6.6",
     "@types/react-dom": "15.5.6",
     "@types/webpack-env": "1.13.1",
     "all": "0.0.0",
     "office-ui-fabric-react": "^5.131.0",
+    "jspdf": "^1.5.3",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
@@ -37,7 +37,6 @@
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",
     "ajv": "~5.2.2",
-    "gulp": "~3.9.1",
-    "typescript": "^2.4.2"
+    "gulp": "~3.9.1"
   }
 }
